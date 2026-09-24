@@ -40,7 +40,11 @@ Team members should use the `/portal/` link rather than sharing the long Google 
 index.html                 Branded service selection page
 complaints/index.html      Customer complaint redirect
 portal/index.html          Internal service portal redirect
-README.md                  This guide
+README.md                  Repository overview and maintenance guide
+Customer-Complaint-Portal-Guide.md
+                           Guide for customers and sales channels
+Internal-Service-Team-Complaint-Workflow.md
+                           Guide for Customer Care and service team
 ```
 
 ## Updating the destination URLs
