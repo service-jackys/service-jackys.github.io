@@ -1,24 +1,43 @@
 # Jacky's Service Portal
 
-This repository provides the GitHub Pages entry point for Jacky's Service Portal.
+This repository is the public GitHub Pages entry point for Jacky's Distribution customer care and after-sales service workflow.
 
-## Public links
+The root page is the professional landing page for customers, sales channels, and authorized internal users. It explains the service journey, shows the supported service brands, and directs each visitor to the correct portal.
 
-- **Portal home:** https://service-jackys.github.io/
-- **Customer Complaint Registration:** https://service-jackys.github.io/complaints/
-- **Internal Service Portal:** https://service-jackys.github.io/portal/
+## Live links
+
+| Link | Purpose | Intended users |
+| --- | --- | --- |
+| [Jacky's Service Portal](https://service-jackys.github.io/) | Professional landing page with service overview, workflow, brands, and access options | Customers, sales team, and service team |
+| [Customer Complaint Registration](https://service-jackys.github.io/complaints/) | Submit a new customer or sales-channel service complaint | Customers, sales team, and B2B clients |
+| [Internal Service Portal](https://service-jackys.github.io/portal/) | Review complaints, complete internal details, and create appointments | Authorized Customer Care and service users |
+| [Customer Portal Guide](https://github.com/service-jackys/service-jackys.github.io/blob/main/Customer-Complaint-Portal-Guide.md) | Instructions for customers and sales channels | Customers and sales team |
+| [Internal Service Team Guide](https://github.com/service-jackys/service-jackys.github.io/blob/main/Internal-Service-Team-Complaint-Workflow.md) | Complaint review and appointment workflow | Customer Care and service team |
+
+## Landing page
+
+The landing page at [https://service-jackys.github.io/](https://service-jackys.github.io/) includes:
+
+- Service-support hero section.
+- Customer complaint and internal portal actions.
+- Three-step service journey:
+  1. Submit a complaint.
+  2. Customer Care reviews the request.
+  3. The service team arranges the appointment.
+- Supported brand presentation for Thomson, Venus, and Philips AC.
+- Separate access panels for customers/sales channels and internal service users.
+- Responsive mobile navigation and reduced-motion accessibility support.
 
 ## What this repository does
 
-The actual service applications are hosted in Google Apps Script. GitHub Pages provides clean, professional links that are easier to share with customers and the service team.
+The actual service applications are hosted in Google Apps Script. GitHub Pages provides the branded landing page and clean links that are easier to share with customers and the service team.
 
-| GitHub Pages link | Destination | Intended users |
-| --- | --- | --- |
-| `/` | Branded service selection page | Customers and team members |
-| `/complaints/` | Customer Complaint Registration Portal | Customers, sales team, and business clients |
-| `/portal/` | Main Jacky's Service Portal | Authorized internal users |
+The landing page does not access Google Sheets or call Apps Script functions directly. It links to the two redirect pages below:
 
-The `complaints/index.html` and `portal/index.html` files redirect visitors to the corresponding Google Apps Script Web App routes. The GitHub Pages URL is the clean entry link; after redirection, the browser may display the Google Apps Script URL because the applications remain hosted there.
+- `complaints/index.html` redirects to the Apps Script complaint route using `?page=complaints`.
+- `portal/index.html` redirects to the normal Apps Script internal portal route.
+
+After redirection, the browser may display the Google Apps Script URL because the applications remain hosted by Google Apps Script.
 
 ## Customer Complaint Registration Portal
 
