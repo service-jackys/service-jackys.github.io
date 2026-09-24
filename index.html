@@ -130,6 +130,60 @@
     @keyframes reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
     @keyframes lift{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-9px)}}
     @keyframes glow{0%,100%{transform:scale(.96);opacity:.75}50%{transform:scale(1.06);opacity:1}}
+
+    /* ===== Audience badge inside buttons (Option 3) ===== */
+    .btn-audience{
+      display:inline-block;
+      padding:2px 7px;
+      border-radius:5px;
+      background:rgba(255,255,255,.22);
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      line-height:1.4;
+    }
+    .btn-audience.alt{
+      background:var(--cyan);
+      color:var(--blue);
+    }
+
+    /* ===== Tooltip on hover (Option 1) ===== */
+    .btn-tip{position:relative;display:inline-flex}
+    .btn-tip .tip{
+      position:absolute;
+      bottom:calc(100% + 10px);
+      left:50%;
+      transform:translateX(-50%) translateY(4px);
+      padding:9px 13px;
+      background:var(--navy);
+      color:#fff;
+      font-size:11.5px;
+      font-weight:600;
+      line-height:1.4;
+      white-space:nowrap;
+      border-radius:8px;
+      box-shadow:0 10px 24px rgba(61,10,18,.22);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease,transform .2s ease;
+      z-index:5;
+    }
+    .btn-tip .tip:after{
+      content:"";
+      position:absolute;
+      top:100%;
+      left:50%;
+      transform:translateX(-50%);
+      border:6px solid transparent;
+      border-top-color:var(--navy);
+    }
+    .btn-tip:hover .tip,
+    .btn-tip:focus-within .tip{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
     @media(max-width:900px){
       .hero-grid{grid-template-columns:1fr;gap:30px}
       .hero-copy{max-width:650px}
@@ -171,6 +225,7 @@
       .cta-panel h2{font-size:25px}
       .footer-inner{align-items:flex-start;flex-direction:column}
       .footer-links{flex-wrap:wrap;gap:12px 18px}
+      .btn-tip .tip{white-space:normal;width:220px}
     }
     @media(prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
@@ -202,12 +257,32 @@
           <div class="eyebrow">Service support, made simple</div>
           <h1>Care that keeps your home moving.</h1>
           <p class="hero-copy">From the first service request to the final appointment, Jacky's connects customers, Customer Care, and our service team through one clear support journey.</p>
+
           <div class="hero-actions">
-            <a class="button button-primary" href="/complaints/">Register a complaint <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="/portal/">Open service portal <span aria-hidden="true">→</span></a>
+            <!-- CUSTOMER BUTTON -->
+            <span class="btn-tip">
+              <a class="button button-primary" href="/complaints/">
+                <span class="btn-audience">Customer</span>
+                Register a complaint
+                <span aria-hidden="true">↗</span>
+              </a>
+              <span class="tip" role="tooltip">For customers — raise a new service request</span>
+            </span>
+
+            <!-- SERVICE TEAM BUTTON -->
+            <span class="btn-tip">
+              <a class="button button-secondary" href="/portal/">
+                <span class="btn-audience alt">Service team</span>
+                Open service portal
+                <span aria-hidden="true">→</span>
+              </a>
+              <span class="tip" role="tooltip">For Jacky's service team — internal login</span>
+            </span>
           </div>
+
           <div class="hero-note"><span class="status-dot" aria-hidden="true"></span> Customer requests are reviewed by our Customer Care team.</div>
         </div>
+
         <div class="hero-visual" aria-label="Illustration representing a connected service request" data-reveal data-reveal-delay="1">
           <div class="visual-glow" aria-hidden="true"></div>
           <div class="visual-card">
@@ -293,6 +368,22 @@
       menuButton.setAttribute('aria-label', 'Open navigation');
     }));
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile: toggle tooltip on tap (since hover doesn't exist on touch)
+    document.querySelectorAll('.btn-tip').forEach(wrap => {
+      const link = wrap.querySelector('a');
+      link.addEventListener('click', (e) => {
+        if (window.matchMedia('(hover: none)').matches) {
+          const tip = wrap.querySelector('.tip');
+          if (!wrap.classList.contains('tip-visible')) {
+            e.preventDefault();
+            document.querySelectorAll('.btn-tip.tip-visible').forEach(w => w.classList.remove('tip-visible'));
+            wrap.classList.add('tip-visible');
+            setTimeout(() => wrap.classList.remove('tip-visible'), 2200);
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
